@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom';
-import firebase from 'firebase/app';
 
 import './style.css'
 
@@ -51,7 +50,7 @@ function Login() {
           
           <p className="link">
             Ainda não tem conta?
-            <a href="/#/join">Cadastre-se</a>
+            <a href="/join">Cadastre-se</a>
           </p>
         </form>
       </div>

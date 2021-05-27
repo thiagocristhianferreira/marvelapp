@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card  } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
-import { getCharacters, getComics } from '../../Services/marvelAPI';
+import { getCharacters } from '../../Services/marvelAPI';
 
 const MarvelCharacters = () => {
   const { 

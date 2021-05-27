@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
