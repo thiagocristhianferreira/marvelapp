@@ -2,19 +2,21 @@ import { useState } from 'react';
 import ContextMarvel from './ContextMarvel';
 
 function ProviderMarvel({ children }) {
-  const [title, setTitle] = useState('');
+  const [titlePage, setTitlePage] = useState('');
   const [characters, setCharacters] = useState([]);
   const [comics, setComics] = useState([]);
-  const [loading, setLoading,] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [onOff, setOnOff] = useState('');
 
   return (
     <ContextMarvel.Provider
       value={
         {
-          title, setTitle,
+          titlePage, setTitlePage,
           loading, setLoading,
           characters, setCharacters,
           comics, setComics,
+          onOff, setOnOff,
         }
       }
     >

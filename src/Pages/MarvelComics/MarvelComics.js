@@ -4,11 +4,13 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
 import { getComics } from '../../Services/marvelAPI';
+import Navbar from '../../Components/NavBar/NavBar';
 
 const MarvelCharacters = () => {
   const { 
     comics, setComics,
     loading, setLoading,
+    setTitlePage,
    } = useContext(ContextMarvel);
 
   useEffect(() => {
@@ -17,8 +19,9 @@ const MarvelCharacters = () => {
       setComics(result);
       setLoading(false);
     }
+    setTitlePage('Marvel Comics');
     fetchComics();
-  }, [setComics, setLoading]);
+  }, [setComics, setLoading, setTitlePage]);
 
   if (loading) {
     return (
@@ -30,7 +33,7 @@ const MarvelCharacters = () => {
   }
   return (
     <section className="w-100 bg-dark d-flex flex-wrap">
-      {/* <Header /> */}
+      <Navbar />
       { comics.map(comic => {
         const { title, description } = comic;
         const { extension, path } = comic.thumbnail;
@@ -53,7 +56,6 @@ const MarvelCharacters = () => {
           </Card>
         )
       }) }
-      {/* <Footer /> */}
     </section>
   );
 };
