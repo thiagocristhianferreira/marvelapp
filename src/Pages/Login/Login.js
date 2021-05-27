@@ -1,10 +1,26 @@
 import { useHistory } from 'react-router-dom';
+import { useContext, useRef } from 'react';
 import firebase from 'firebase/app';
-
 import './style.css'
+import ContextMarvel from '../../Context/ContextMarvel';
 
 function Login() {
   const history = useHistory();
+  const emailRef = useRef(null);
+  const passRef = useRef(null);
+
+  const { setOnOff } = useContext(ContextMarvel);
+
+  const loginAuth = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+      setOnOff('on');
+    })
+    .catch((error) => {
+      console.log(error.code, error.message);
+      return alert(error.message);
+    });
+  }
 
   return (
     <section>
@@ -19,6 +35,7 @@ function Login() {
               required
               type="text"
               placeholder="exemplo@email.com"
+              ref={emailRef}
             />
           </p>
            
@@ -30,6 +47,7 @@ function Login() {
               required
               type="password"
               placeholder="ex. 123456789"
+              ref={passRef}
             /> 
           </p>
            
@@ -42,8 +60,11 @@ function Login() {
             className="join-buttom"
             type="submit"
             value="Logar"
-            onClick={ () => {
+            onClick={(e) => {
+              e.preventDefault();
               history.push('/marvelcharacters');
+              loginAuth(emailRef.current.value, passRef.current.value);
+              alert('Bem-vindo ' + emailRef.current.value);
             } }
           >
             Logar
@@ -51,7 +72,7 @@ function Login() {
           
           <p className="link">
             Ainda não tem conta?
-            <a href="/#/join">Cadastre-se</a>
+            <a href="/join">Cadastre-se</a>
           </p>
         </form>
       </div>

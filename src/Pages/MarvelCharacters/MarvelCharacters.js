@@ -1,26 +1,27 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card  } from 'react-bootstrap';
 
 import ContextMarvel from '../../Context/ContextMarvel';
 import loadingGif from '../../Images/loading-buffering.gif';
-import { getCharacters, getComics } from '../../Services/marvelAPI';
+import { getCharacters } from '../../Services/marvelAPI';
+import Navbar from '../../Components/NavBar/NavBar';
 
 const MarvelCharacters = () => {
   const { 
     loading, setLoading,
     characters, setCharacters,
+    setTitlePage,
    } = useContext(ContextMarvel);
 
   useEffect(() => {
     const fetchCharacters = async () => {
       const result = await getCharacters();
-      console.log(result);
       setCharacters(result);
       setLoading(false);
+      setTitlePage('Marvel Characters');
     }
     fetchCharacters();
-  }, [setCharacters, setLoading]);
+  }, [setCharacters, setLoading, setTitlePage]);
 
   if (loading) {
     return (
@@ -32,11 +33,10 @@ const MarvelCharacters = () => {
   }
   return (
     <section className="w-100 bg-dark d-flex flex-wrap">
-      {/* <Header /> */}
+      <Navbar />
       { characters.map(comic => {
         const { name, description } = comic;
         const { extension, path } = comic.thumbnail;
-        // const creators = comic.creators.items;
         return (
           <Card className="m-4" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={`${path}.${extension}`} />
@@ -49,7 +49,6 @@ const MarvelCharacters = () => {
           </Card>
         )
       }) }
-      {/* <Footer /> */}
     </section>
   );
 };

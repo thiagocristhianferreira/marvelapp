@@ -12,7 +12,7 @@ function Join() {
     return firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        alert('Bem-vindo ' + emailRef.current.value);
+        alert('Bem-vindo ' + email);
         history.push('/marvelcharacters');
       })
       .catch((error) => {
